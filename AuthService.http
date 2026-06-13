@@ -1,0 +1,33 @@
+@host = https://localhost:7001
+@token = <pega aquí el token que devuelve el login>
+
+### 1. Login exitoso
+POST {{host}}/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "francisco",
+  "password": "Password123"
+}
+
+### 2. Login fallido (password mal)
+POST {{host}}/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "francisco",
+  "password": "wrongpassword"
+}
+
+### 3. Validar token
+POST {{host}}/api/auth/validate
+Content-Type: application/json
+
+"{{token}}"
+
+### 4. Ruta protegida CON token
+GET {{host}}/api/auth/me
+Authorization: Bearer {{token}}
+
+### 5. Ruta protegida SIN token (debe dar 401)
+GET {{host}}/api/auth/me
