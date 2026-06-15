@@ -29,7 +29,7 @@ public class AuthService(JwtHelper jwtHelper) : IAuthService
             Success = true,
             Token = token,
             Username = user.Username,
-            Role = user.Role,
+            Role = user.Role.ToString(),
             ExpiresAt = expiresAt,
             Message = "Login exitoso"
         };
@@ -73,7 +73,7 @@ public class AuthService(JwtHelper jwtHelper) : IAuthService
             Success = true,
             Token = newToken,
             Username = user.Username,
-            Role = user.Role,
+            Role = user.Role.ToString(),
             ExpiresAt = expiresAt,
             Message = "Token renovado"
         };

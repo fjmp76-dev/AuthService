@@ -22,7 +22,7 @@ public class JwtHelper(IConfiguration config)
             new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
             new Claim(ClaimTypes.Name, user.Username),
             new Claim(ClaimTypes.Email, user.Email),
-            new Claim(ClaimTypes.Role, user.Role),
+            new Claim(ClaimTypes.Role, user.Role.ToString()),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()), // ID único del token
             new Claim(JwtRegisteredClaimNames.Iat,                            // cuándo se emitió
                 DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString())
@@ -69,5 +69,14 @@ public class JwtHelper(IConfiguration config)
         {
             return null; // token inválido o expirado
         }
+    }
+
+    public string GenerateRefreshToken()
+    {
+        // Token aleatorio criptográficamente seguro
+        var randomBytes = new byte[64];
+        using var rng = System.Security.Cryptography.RandomNumberGenerator.Create();
+        rng.GetBytes(randomBytes);
+        return Convert.ToBase64String(randomBytes);
     }
 }

@@ -13,7 +13,7 @@ public static class UserStore
             Email = "francisco@example.com",
             // BCrypt hash de "Password123"
             PasswordHash = BCrypt.Net.BCrypt.HashPassword("Password123"),
-            Role = "Admin"
+            Role = UserType.Admin
         },
         new User
         {
@@ -21,7 +21,7 @@ public static class UserStore
             Username = "testuser",
             Email = "test@example.com",
             PasswordHash = BCrypt.Net.BCrypt.HashPassword("Test456"),
-            Role = "User"
+            Role = UserType.User
         }
     ];
 
