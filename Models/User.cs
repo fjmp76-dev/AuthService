@@ -1,4 +1,6 @@
-﻿namespace AuthService.Models;
+﻿using AuthService.Enums;
+
+namespace AuthService.Models;
 
 public class User
 {

@@ -22,7 +22,7 @@ public class AuthService(JwtHelper jwtHelper) : IAuthService
 
         // 3. Generar token JWT
         var token = jwtHelper.GenerateToken(user);
-        var expiresAt = DateTime.UtcNow.AddMinutes(5);
+        var expiresAt = DateTime.UtcNow.AddMinutes(jwtHelper.ExpirationMinutes);
 
         return new AuthResponse
         {
@@ -66,7 +66,7 @@ public class AuthService(JwtHelper jwtHelper) : IAuthService
 
         // Generar token nuevo con 5 minutos frescos
         var newToken = jwtHelper.GenerateToken(user);
-        var expiresAt = DateTime.UtcNow.AddMinutes(5);
+        var expiresAt = DateTime.UtcNow.AddMinutes(jwtHelper.ExpirationMinutes);
 
         return new AuthResponse
         {

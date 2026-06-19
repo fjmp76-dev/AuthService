@@ -8,11 +8,11 @@ namespace AuthService.Helpers;
 
 public class JwtHelper(IConfiguration config)
 {
+    public int ExpirationMinutes => config.GetValue<int>("Jwt:ExpirationMinutes");
     public string GenerateToken(User user)
     {
         // 1. La clave secreta — debe ser la misma para generar Y validar
-        var key = new SymmetricSecurityKey(
-            Encoding.UTF8.GetBytes(config["Jwt:Key"]!));
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:Key"]!));
 
         var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
@@ -24,13 +24,11 @@ public class JwtHelper(IConfiguration config)
             new Claim(ClaimTypes.Email, user.Email),
             new Claim(ClaimTypes.Role, user.Role.ToString()),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()), // ID único del token
-            new Claim(JwtRegisteredClaimNames.Iat,                            // cuándo se emitió
-                DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString())
+            new Claim(JwtRegisteredClaimNames.Iat, DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString()) // cuándo se emitió
         };
 
         // 3. Construir el token con expiración de 5 minutos
-        var expiration = DateTime.UtcNow.AddMinutes(
-            config.GetValue<int>("Jwt:ExpirationMinutes"));
+        var expiration = DateTime.UtcNow.AddMinutes(this.ExpirationMinutes);
 
         var token = new JwtSecurityToken(
             issuer: config["Jwt:Issuer"],

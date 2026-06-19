@@ -12,6 +12,7 @@ builder.Services.AddSwaggerGen();
 // Registrar nuestros servicios en DI
 builder.Services.AddSingleton<JwtHelper>();
 builder.Services.AddScoped<IAuthService, AuthService.Services.AuthService>();
+builder.Services.AddScoped<IPermissionsService, PermissionsService>();
 
 // ── Middlewares externos ───────────────────────────────────
 builder.Services.AddJwtAuthentication(builder.Configuration);

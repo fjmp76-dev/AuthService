@@ -1,4 +1,5 @@
-﻿using AuthService.Models;
+﻿using AuthService.Enums;
+using AuthService.Models;
 
 namespace AuthService.Data;
 
@@ -20,6 +21,14 @@ public static class UserStore
             Id = 2,
             Username = "testuser",
             Email = "test@example.com",
+            PasswordHash = BCrypt.Net.BCrypt.HashPassword("Test456"),
+            Role = UserType.User
+        },
+        new User
+        {
+            Id = 3,
+            Username = "testpato",
+            Email = "testpato@example.com",
             PasswordHash = BCrypt.Net.BCrypt.HashPassword("Test456"),
             Role = UserType.User
         }
