@@ -1,7 +1,7 @@
 ﻿using AuthService.Data;
 using AuthService.Models;
 
-namespace AuthService.Services;
+namespace AuthService.Services.Permissions;
 
 public class PermissionsService : IPermissionsService
 {

@@ -34,7 +34,7 @@ public static class UserStore
         }
     ];
 
-    public static User? FindByUsername(string username) =>
+    public static User FindByUsername(string username) =>
         Users.FirstOrDefault(u =>
             u.Username.Equals(username, StringComparison.OrdinalIgnoreCase));
 }

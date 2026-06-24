@@ -2,7 +2,7 @@
 using AuthService.Helpers;
 using AuthService.Models;
 
-namespace AuthService.Services;
+namespace AuthService.Services.Auth;
 
 public class AuthService(JwtHelper jwtHelper) : IAuthService
 {

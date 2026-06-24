@@ -1,6 +1,6 @@
 ﻿using AuthService.Models;
 
-namespace AuthService.Services;
+namespace AuthService.Services.Permissions;
 
 public interface IPermissionsService
 {

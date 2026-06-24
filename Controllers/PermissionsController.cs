@@ -1,4 +1,4 @@
-﻿using AuthService.Services;
+﻿using AuthService.Services.Permissions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
