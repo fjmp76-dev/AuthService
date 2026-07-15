@@ -20,6 +20,7 @@ builder.Services.AddScoped<ICapturaService, CapturaService>();
 // ── Middlewares externos ───────────────────────────────────
 builder.Services.AddJwtAuthentication(builder.Configuration);
 builder.Services.AddAngularCors(builder.Configuration);
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 
 // ── Pipeline ───────────────────────────────────────────────
 var app = builder.Build();
@@ -29,7 +30,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseExceptionHandler(opt => { });            // primero exception handler
 app.UseCors(CorsExtensions.AngularPolicy);      // CORS antes de auth
 app.UseAuthentication();                        // primero authentication
 app.UseAuthorization();                         // luego authorization
